@@ -2,7 +2,7 @@
 
 // Оператори порівняння повертають true або false.
 const age = 18;
-const userName = "Олена";
+const userName = "Олег";
 
 console.log("=== Порівняння ===");
 console.log("5 === 5:", 5 === 5);       // true: однакові значення й типи

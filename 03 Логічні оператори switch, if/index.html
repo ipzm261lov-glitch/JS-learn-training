@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10172a">
+    <title>Кодова арена — if і switch у JavaScript</title>
+<link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+    <main class="game">
+        <p class="eyebrow">Навчальна гра · JavaScript</p>
+        <h1>Кодова арена</h1>
+        <p class="intro">Дізнайся, як логічні оператори, умови if та switch керують виконанням коду. Прочитай теорію, спробуй вправи й перевір знання у вікторині!</p>
+
+        <section class="lesson-card" aria-labelledby="theory-title">
+            <h2 id="theory-title">Теорія</h2>
+            <p><strong>Логічний оператор</strong> виконує операцію над логічними значеннями або умовами та повертає результат, який можна використати в розгалуженні програми.</p>
+            <ul>
+                <li><code>&amp;&amp;</code> — логічне «І»: результат істинний, якщо істинні обидві умови.</li>
+                <li><code>||</code> — логічне «АБО»: результат істинний, якщо істинна хоча б одна умова.</li>
+                <li><code>!</code> — логічне «НЕ»: змінює істинне значення на хибне і навпаки.</li>
+            </ul>
+            <p><code>if</code> виконує блок коду, коли умова істинна; <code>else if</code> перевіряє іншу умову, а <code>else</code> спрацьовує, якщо попередні умови хибні. <code>switch</code> вибирає дію за точним збігом значення з одним із варіантів <code>case</code>. Команда <code>break</code> завершує відповідний варіант, а <code>default</code> обробляє інші значення.</p>
+        </section>
+
+        <section class="lesson-card exercises" aria-labelledby="exercises-title">
+            <h2 id="exercises-title">Практичні завдання</h2>
+            <article class="exercise">
+                <h3>1. Визначення вікової групи</h3>
+                <p>Введи вік. Програма перевірить, що введено число, і повідомить, чи є користувач дитиною, підлітком або дорослим.</p>
+                <pre><code>const input = prompt("Скільки вам років?");
+const age = Number(input);
+
+if (input === null) {
+  // Введення скасовано
+} else if (input.trim() === "" || !Number.isFinite(age)) {
+  alert("Введено не число.");
+} else if (age &lt; 12) {
+  alert("Ви дитина.");
+} else if (age &lt; 18) {
+  alert("Ви підліток.");
+} else {
+  alert("Ви дорослий.");
+}</code></pre>
+                <button class="action-button" id="age-button" type="button">Перевірити вік</button>
+            </article>
+            <article class="exercise">
+                <h3>2. Кількість днів у місяці</h3>
+                <p>Введи назву місяця українською. Результат з’явиться в консолі розробника (натисни F12, щоб її відкрити). Для лютого враховано високосний рік.</p>
+                <pre><code>switch (month) {
+  case "січень":
+  case "березень":
+  case "травень":
+  case "липень":
+  case "серпень":
+  case "жовтень":
+  case "грудень":
+    console.log("31 день");
+    break;
+  case "квітень":
+  case "червень":
+  case "вересень":
+  case "листопад":
+    console.log("30 днів");
+    break;
+  case "лютий":
+    console.log("28 або 29 днів");
+    break;
+  default:
+    console.log("Такого місяця не знайдено.");
+}</code></pre>
+                <button class="action-button" id="month-button" type="button">Перевірити місяць</button>
+            </article>
+        </section>
+
+        <section class="stats" aria-label="Ігрова статистика">
+            <div class="stat">
+                <span class="stat-label">Досвід</span>
+                <strong id="score">0 XP</strong>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Серія 🔥</span>
+                <strong id="streak">0</strong>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Рівень</span>
+                <strong id="level">Новачок</strong>
+            </div>
+        </section>
+
+        <section class="quiz-card" aria-labelledby="question">
+            <div class="progress-row">
+                <span id="question-count">Запитання 1 з 20</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div
+                class="progress-track"
+                id="progress-track"
+                role="progressbar"
+                aria-label="Прогрес тесту"
+                aria-valuemin="0"
+                aria-valuemax="20"
+                aria-valuenow="0"
+            >
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div id="quiz-content">
+                <h2 class="question" id="question"></h2>
+                <div class="answers" id="answers"></div>
+                <section class="feedback" id="feedback" aria-live="polite" hidden>
+                    <h3>Пояснення</h3>
+                    <p id="feedback-explanation"></p>
+                    <h3>Приклад коду</h3>
+                    <pre><code id="feedback-code"></code></pre>
+                    <h3>Практичне застосування</h3>
+                    <p id="feedback-application"></p>
+                </section>
+                <div class="actions">
+                    <button class="action-button" id="next-button" type="button" hidden>Далі</button>
+                </div>
+            </div>
+            <div class="result" id="result" aria-live="polite" hidden>
+                <p class="eyebrow">Раунд завершено</p>
+                <h2 id="result-title"></h2>
+                <p id="result-summary"></p>
+                <button class="action-button" id="restart-button" type="button">Зіграти ще раз</button>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

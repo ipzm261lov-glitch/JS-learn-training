@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10172a">
+    <title>Loops</title>
+<link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+    <main class="game">
+        <p class="eyebrow">Навчальна гра · JavaScript</p>
+        <h1>Кодова арена</h1>
+        <p class="intro">Дізнайся, як цикли повторюють команди в JavaScript. Прочитай теорію, спробуй вправи й перевір знання у вікторині!</p>
+
+        <section class="lesson-card" aria-labelledby="theory-title">
+            <h2 id="theory-title">Теоретичні питання</h2>
+            <h3>1. Що таке цикл у програмуванні?</h3>
+            <p>Цикл — це конструкція, яка повторює блок коду кілька разів: доки виконується умова або доки не буде перебрано всі елементи.</p>
+            <h3>2. Які види циклів є в JavaScript?</h3>
+            <ul>
+                <li><code>for</code> — повторює код із лічильником; зручно, коли відома кількість повторень.</li>
+                <li><code>while</code> — повторює код, поки умова істинна; умова перевіряється перед кожною ітерацією.</li>
+                <li><code>do...while</code> — спершу виконує код, а потім перевіряє умову, тому тіло виконується щонайменше один раз.</li>
+                <li><code>for...of</code> — перебирає значення ітерованого об’єкта, наприклад елементи масиву.</li>
+                <li><code>for...in</code> — перебирає перелічувані ключі об’єкта.</li>
+            </ul>
+            <h3>3. Чим відрізняються цикли while і do...while?</h3>
+            <p>У <code>while</code> умова перевіряється до виконання тіла — якщо вона одразу хибна, цикл не запуститься. У <code>do...while</code> умова перевіряється після тіла, тож код виконається принаймні один раз.</p>
+            <pre><code>while (умова) {
+  // може не виконатися жодного разу
+}
+
+do {
+  // виконається щонайменше один раз
+} while (умова);</code></pre>
+        </section>
+
+        <section class="lesson-card exercises" aria-labelledby="exercises-title">
+            <h2 id="exercises-title">Практичні завдання</h2>
+            <article class="exercise">
+                <h3>1. Числа в діапазоні</h3>
+                <p>Введи два числа. Якщо значення не є числами, програма попросить ввести їх ще раз. Потім вона виведе всі цілі числа в діапазоні від меншого до більшого включно.</p>
+                <pre><code>for (let number = Math.ceil(min); number &lt;= max; number++) {
+  console.log(number);
+}</code></pre>
+                <button class="action-button" id="range-button" type="button">Вивести числа</button>
+                <p class="exercise-result" id="range-result" aria-live="polite"></p>
+            </article>
+            <article class="exercise">
+                <h3>2. Парне число</h3>
+                <p>Введи ціле парне число. Якщо введено не число, не ціле або непарне число, програма проситиме повторити введення.</p>
+                <pre><code>while (number % 2 !== 0) {
+  // попросити ввести число ще раз
+}</code></pre>
+                <button class="action-button" id="even-button" type="button">Перевірити число</button>
+                <p class="exercise-result" id="even-result" aria-live="polite"></p>
+            </article>
+        </section>
+
+        <section class="stats" aria-label="Ігрова статистика">
+            <div class="stat">
+                <span class="stat-label">Досвід</span>
+                <strong id="score">0 XP</strong>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Серія 🔥</span>
+                <strong id="streak">0</strong>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Рівень</span>
+                <strong id="level">Новачок</strong>
+            </div>
+        </section>
+
+        <section class="quiz-card" aria-labelledby="question">
+            <div class="progress-row">
+                <span id="question-count">Запитання 1</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div
+                class="progress-track"
+                id="progress-track"
+                role="progressbar"
+                aria-label="Прогрес тесту"
+                aria-valuemin="0"
+                aria-valuemax="0"
+                aria-valuenow="0"
+            >
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div id="quiz-content">
+                <h2 class="question" id="question"></h2>
+                <div class="answers" id="answers"></div>
+                <section class="feedback" id="feedback" aria-live="polite" hidden>
+                    <h3>Пояснення</h3>
+                    <p id="feedback-explanation"></p>
+                    <h3>Приклад коду</h3>
+                    <pre><code id="feedback-code"></code></pre>
+                    <h3>Практичне застосування</h3>
+                    <p id="feedback-application"></p>
+                </section>
+                <div class="actions">
+                    <button class="action-button" id="next-button" type="button" hidden>Далі</button>
+                </div>
+            </div>
+            <div class="result" id="result" aria-live="polite" hidden>
+                <p class="eyebrow">Раунд завершено</p>
+                <h2 id="result-title"></h2>
+                <p id="result-summary"></p>
+                <button class="action-button" id="restart-button" type="button">Зіграти ще раз</button>
+            </div>
+        </section>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>

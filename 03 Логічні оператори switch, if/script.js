@@ -232,6 +232,90 @@ const questions = [
 		explanation: "! змінює булеве значення на протилежне, тож умова істинна, якщо hasAccess — false.",
 		code: "if (!hasAccess) {\n  console.log('Доступ заборонено');\n}",
 		application: "Заперечення часто використовують для обробки випадку, коли користувач не авторизований або ресурс недоступний."
+	},
+	{
+		question: "Що виведе цей код, якщо temperature дорівнює 30?",
+		answers: ["Тепло", "Прохолодно", "Обидва повідомлення", "Нічого"],
+		correct: 0,
+		explanation: "Умова temperature > 25 істинна, тому виконається блок if, а блок else буде пропущено.",
+		code: 'const temperature = 30;\nif (temperature > 25) {\n  console.log("Тепло");\n} else {\n  console.log("Прохолодно");\n}',
+		application: "Використовуй if та else, щоб вибрати одну з двох дій залежно від умови."
+	},
+	{
+		question: "Що виведе код для age = 15?",
+		answers: ["Дитина", "Підліток", "Дорослий", "Нічого"],
+		correct: 1,
+		explanation: "Перша умова age < 12 хибна, а наступна age < 18 істинна, тому виконається відповідна гілка else if.",
+		code: 'const age = 15;\nif (age < 12) {\n  console.log("Дитина");\n} else if (age < 18) {\n  console.log("Підліток");\n} else {\n  console.log("Дорослий");\n}',
+		application: "Ланцюжок else if зручно використовувати, коли потрібно розрізнити кілька взаємовиключних діапазонів."
+	},
+	{
+		question: "Яка умова перевіряє, що число value належить діапазону від 1 до 10 включно?",
+		answers: [
+			"value >= 1 || value <= 10",
+			"value >= 1 && value <= 10",
+			"value > 1 && value < 10",
+			"value === 1 && value === 10"
+		],
+		correct: 1,
+		explanation: "Для включного діапазону обидві умови мають бути істинними: значення не менше 1 і не більше 10.",
+		code: "if (value >= 1 && value <= 10) {\n  console.log('У діапазоні');\n}",
+		application: "Так перевіряють введені числа, наприклад оцінку в дозволених межах."
+	},
+	{
+		question: "Що станеться, якщо умова if хибна і блоку else немає?",
+		answers: [
+			"Виконання програми завершиться",
+			"Блок if виконається один раз",
+			"Тіло if буде пропущено, програма продовжиться",
+			"Виникне помилка"
+		],
+		correct: 2,
+		explanation: "Якщо умова if хибна, його тіло не виконується. Без else програма просто переходить до наступної команди.",
+		code: "if (false) {\n  console.log('Цей текст не з’явиться');\n}\nconsole.log('Програма працює далі');",
+		application: "Блок else потрібен лише тоді, коли треба виконати альтернативну дію."
+	},
+	{
+		question: 'Що виведе switch, якщо value — число 2?',
+		answers: ["Рядок", "Число", "Інше значення", "Помилка"],
+		correct: 1,
+		explanation: "У switch порівняння case відбувається зі строгим збігом: число 2 не збігається з рядком \"2\", але збігається з числом 2.",
+		code: 'const value = 2;\nswitch (value) {\n  case "2": console.log("Рядок"); break;\n  case 2: console.log("Число"); break;\n  default: console.log("Інше значення");\n}',
+		application: "Перевіряй тип значення, коли використовуєш switch для даних із форм або API."
+	},
+	{
+		question: "Яку роль виконує default у switch?",
+		answers: [
+			"Виконується перед усіма case",
+			"Виконується, якщо жоден case не збігся",
+			"Завершує програму",
+			"Повторює попередній case"
+		],
+		correct: 1,
+		explanation: "Гілка default обробляє значення, для якого не знайшлося відповідного case.",
+		code: 'switch (color) {\n  case "синій": console.log("Обрано синій"); break;\n  default: console.log("Невідомий колір");\n}',
+		application: "Додавай default, щоб передбачити невідомі або неочікувані значення."
+	},
+	{
+		question: "Що виведе цей switch, якщо у case 1 немає break?",
+		answers: ["Лише A", "Лише B", "A, потім B", "Нічого"],
+		correct: 2,
+		explanation: "Без break виконання переходить до наступної гілки case — це називають провалюванням (fall-through).",
+		code: 'switch (1) {\n  case 1: console.log("A");\n  case 2: console.log("B"); break;\n}',
+		application: "Додавай break після case, щоб випадково не виконати код наступного варіанта."
+	},
+	{
+		question: "Як у switch об’єднати кілька значень, для яких потрібна одна дія?",
+		answers: [
+			"Написати кілька case підряд перед спільним кодом",
+			"Використати кілька команд default",
+			"Вставити if усередину кожного case",
+			"З’єднати значення оператором && у назві case"
+		],
+		correct: 0,
+		explanation: "Кілька case без коду між ними переходять до спільного блоку команд.",
+		code: 'switch (day) {\n  case "субота":\n  case "неділя":\n    console.log("Вихідний");\n    break;\n}',
+		application: "Групування case допомагає не дублювати однакові дії для різних значень."
 	}
 ];
 
@@ -349,9 +433,9 @@ function finishGame() {
 
 	if (correctAnswers === questions.length) {
 		resultTitle.textContent = "Ідеальний раунд! 🏆";
-	} else if (correctAnswers >= 7) {
+	} else if (correctAnswers >= 10) {
 		resultTitle.textContent = "Чудовий результат! ✨";
-	} else if (correctAnswers >= 4) {
+	} else if (correctAnswers >= 6) {
 		resultTitle.textContent = "Гарний прогрес! 🚀";
 	} else {
 		resultTitle.textContent = "Є куди зростати! 💪";
@@ -452,25 +536,25 @@ showQuestion();
 //   alert("Ви дорослий.");
 // }
 
-switch (month) {
-  case "січень":
-  case "березень":
-  case "травень":
-  case "липень":
-  case "серпень":
-  case "жовтень":
-  case "грудень":
-    console.log("31 день");
-    break;
-  case "квітень":
-  case "червень":
-  case "вересень":
-  case "листопад":
-    console.log("30 днів");
-    break;
-  case "лютий":
-    console.log("28 або 29 днів");
-    break;
-  default:
-    console.log("Такого місяця не знайдено.");
-}
+// switch (month) {
+//   case "січень":
+//   case "березень":
+//   case "травень":
+//   case "липень":
+//   case "серпень":
+//   case "жовтень":
+//   case "грудень":
+//     console.log("31 день");
+//     break;
+//   case "квітень":
+//   case "червень":
+//   case "вересень":
+//   case "листопад":
+//     console.log("30 днів");
+//     break;
+//   case "лютий":
+//     console.log("28 або 29 днів");
+//     break;
+//   default:
+//     console.log("Такого місяця не знайдено.");
+// }
